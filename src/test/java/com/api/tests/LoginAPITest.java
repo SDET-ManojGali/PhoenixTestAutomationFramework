@@ -5,14 +5,13 @@ import static com.api.utils.ConfigManager.*;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.testng.annotations.Test;
-import java.io.IOException;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 
 public class LoginAPITest {
 
     @Test
-    public void loginAPITest() throws IOException {
+    public void loginAPITest(){
         UserCredentials userCredentials = new UserCredentials("iamfd","password");
                 given().
                 baseUri(getProperty("BASE_URI"))
