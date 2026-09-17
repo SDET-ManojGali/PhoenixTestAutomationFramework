@@ -28,9 +28,8 @@ public class UserDetailsAPITest {
                 .then()
                 .statusCode(200)
                 .time(lessThan(1000L))
-                .body(matchesJsonSchemaInClasspath("responseSchema/userDetailsResponseSchema.json"))
+                .body(matchesJsonSchemaInClasspath("responseSchema/UserDetailsResponseSchema.json"))
                 .log()
                 .body();
-
     }
 }
