@@ -11,8 +11,8 @@ import org.hamcrest.Matchers;
 
 public class SpecUtil {
 
-    public static RequestSpecification requestSpec(){
-        RequestSpecification requestSpecification=new RequestSpecBuilder().
+    public static RequestSpecification requestSpec() {
+        RequestSpecification requestSpecification = new RequestSpecBuilder().
                 setBaseUri(ConfigManager.getProperty("BASE_URI"))
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
@@ -24,8 +24,8 @@ public class SpecUtil {
         return requestSpecification;
     }
 
-    public static RequestSpecification requestSpec(Object payload){
-        RequestSpecification requestSpecification=new RequestSpecBuilder().
+    public static RequestSpecification requestSpec(Object payload) {
+        RequestSpecification requestSpecification = new RequestSpecBuilder().
                 setBaseUri(ConfigManager.getProperty("BASE_URI"))
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
@@ -38,12 +38,12 @@ public class SpecUtil {
         return requestSpecification;
     }
 
-    public static RequestSpecification requestSpecWithAuth(Role role){
-        RequestSpecification requestSpecification=new RequestSpecBuilder().
+    public static RequestSpecification requestSpecWithAuth(Role role) {
+        RequestSpecification requestSpecification = new RequestSpecBuilder().
                 setBaseUri(ConfigManager.getProperty("BASE_URI"))
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
-                .addHeader("Authorization",AuthTokenProvider.getToken(role))
+                .addHeader("Authorization", AuthTokenProvider.getToken(role))
                 .log(LogDetail.URI)
                 .log(LogDetail.METHOD)
                 .log(LogDetail.HEADERS)
@@ -52,8 +52,23 @@ public class SpecUtil {
         return requestSpecification;
     }
 
-    public static ResponseSpecification responseSpec_OK(){
-        ResponseSpecification responseSpecification=new ResponseSpecBuilder().
+    public static RequestSpecification requestSpecWithAuth(Role role, Object payload) {
+        RequestSpecification requestSpecification = new RequestSpecBuilder().
+                setBaseUri(ConfigManager.getProperty("BASE_URI"))
+                .setContentType(ContentType.JSON)
+                .setAccept(ContentType.JSON)
+                .addHeader("Authorization", AuthTokenProvider.getToken(role))
+                .setBody(payload)
+                .log(LogDetail.URI)
+                .log(LogDetail.METHOD)
+                .log(LogDetail.HEADERS)
+                .log(LogDetail.BODY)
+                .build();
+        return requestSpecification;
+    }
+
+    public static ResponseSpecification responseSpec_OK() {
+        ResponseSpecification responseSpecification = new ResponseSpecBuilder().
                 expectContentType(ContentType.JSON)
                 .expectResponseTime(Matchers.lessThan(1000L))
                 .expectStatusCode(200)
@@ -62,8 +77,8 @@ public class SpecUtil {
         return responseSpecification;
     }
 
-    public static ResponseSpecification responseSpec_JSON(int statusCode){
-        ResponseSpecification responseSpecification=new ResponseSpecBuilder().
+    public static ResponseSpecification responseSpec_JSON(int statusCode) {
+        ResponseSpecification responseSpecification = new ResponseSpecBuilder().
                 expectContentType(ContentType.JSON)
                 .expectResponseTime(Matchers.lessThan(1000L))
                 .expectStatusCode(statusCode)
@@ -72,8 +87,8 @@ public class SpecUtil {
         return responseSpecification;
     }
 
-    public static ResponseSpecification responseSpec_TEXT(int statusCode){
-        ResponseSpecification responseSpecification=new ResponseSpecBuilder()
+    public static ResponseSpecification responseSpec_TEXT(int statusCode) {
+        ResponseSpecification responseSpecification = new ResponseSpecBuilder()
                 .expectResponseTime(Matchers.lessThan(1000L))
                 .expectStatusCode(statusCode)
                 .log(LogDetail.ALL)
