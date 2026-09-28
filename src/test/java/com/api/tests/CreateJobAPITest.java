@@ -3,14 +3,13 @@ package com.api.tests;
 import static io.restassured.RestAssured.*;
 
 import com.api.constants.Role;
-import com.api.pojos.*;
+import com.api.request.model.*;
 import com.api.utils.SpecUtil;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreateJobAPITest {
