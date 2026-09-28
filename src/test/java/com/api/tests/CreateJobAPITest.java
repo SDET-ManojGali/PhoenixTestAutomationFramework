@@ -2,7 +2,7 @@ package com.api.tests;
 
 import static io.restassured.RestAssured.*;
 
-import com.api.constants.Role;
+import com.api.constants.*;
 import com.api.request.model.*;
 import static com.api.utils.DateTimeUtil.*;
 import com.api.utils.SpecUtil;
@@ -19,11 +19,11 @@ public class CreateJobAPITest {
     public static void createJobAPITest() {
         Customer customer = new Customer("Jarret", "Kemmer", "302-712-6655", "", "Tony_Robel95@hotmail.com", "");
         CustomerAddress customer_address = new CustomerAddress("c 304", "Jupiter", "MG road", "Bangur Nagar", "Goregaon West", "411039", "India", "Maharashtra");
-        CustomerProduct customer_product = new CustomerProduct(getTimeWithDaysAgo(10), "10763902147602", "10763902147602", "10763902147602", getTimeWithDaysAgo(10), 1, 1);
-        Problems problems = new Problems(1, "Battery Issue");
+        CustomerProduct customer_product = new CustomerProduct(getTimeWithDaysAgo(10), "10763902147603", "10763902147603", "10763902147603", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
+        Problems problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Battery Issue");
         List<Problems> problemsList=new ArrayList<>();
         problemsList.add(problems);
-        CreateJobPayload createJobPayload = new CreateJobPayload(0, 2, 1, 1, customer, customer_address, customer_product, problemsList);
+        CreateJobPayload createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(), Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customer_address, customer_product, problemsList);
         given().
                 spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
                 .when()
