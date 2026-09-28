@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.*;
 
 import com.api.constants.Role;
 import com.api.request.model.*;
+import static com.api.utils.DateTimeUtil.*;
 import com.api.utils.SpecUtil;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import static org.hamcrest.Matchers.*;
@@ -18,7 +19,7 @@ public class CreateJobAPITest {
     public static void createJobAPITest() {
         Customer customer = new Customer("Jarret", "Kemmer", "302-712-6655", "", "Tony_Robel95@hotmail.com", "");
         CustomerAddress customer_address = new CustomerAddress("c 304", "Jupiter", "MG road", "Bangur Nagar", "Goregaon West", "411039", "India", "Maharashtra");
-        CustomerProduct customer_product = new CustomerProduct("2025-04-06T18:30:00.000Z", "10763902147601", "10763902147601", "10763902147601", "2025-04-06T18:30:00.000Z", 1, 1);
+        CustomerProduct customer_product = new CustomerProduct(getTimeWithDaysAgo(10), "10763902147602", "10763902147602", "10763902147602", getTimeWithDaysAgo(10), 1, 1);
         Problems problems = new Problems(1, "Battery Issue");
         List<Problems> problemsList=new ArrayList<>();
         problemsList.add(problems);
