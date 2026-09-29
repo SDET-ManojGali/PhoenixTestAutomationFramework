@@ -18,6 +18,12 @@ on:
           - dev
         default: qa
         required: true
+      suiteXmlFile:
+        description: "TestNG Xml File"
+        type: choice
+        options: [testng.xml, smoke.xml, regression.xml]
+        default: testng.xml
+        required: true
 
 jobs:
   test:
@@ -32,8 +38,13 @@ jobs:
           java-version: '24'
           distribution: 'temurin'
           cache: maven
+      - name: Default values for Execution
+        id: default
+        run: |
+          echo "suiteXmlFile=${{ github.event.inputs.suiteXmlFile || 'testng.xml' }}" >> $GITHUB_OUTPUT
+          echo "env=${{ github.event.inputs.env || 'qa' }}" >> $GITHUB_OUTPUT
       - name: Execute Test Automation Framework
-        run: mvn test -DsuiteXmlFile=testng.xml -Denv="{{ github.event.inputs.env }}"
+        run: mvn test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}"
       - name: Upload a Build Artifact
         if: always()
         uses: actions/upload-artifact@v7.0.1
